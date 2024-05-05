@@ -16,8 +16,8 @@ jobs:
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.AWSSSH }}
+          ssh-private-key: ${{ secrets.AWSSSH ]] }}
 
       - name: Deploy website via SSH
         run: |
-          scp -r ./* ubuntu@13.214.82.63:/www/wwwroot/kdjmatta.run.place
+          scp -r ./* ubuntu@13.214.82.63:/www/wwwroot/awstesting.run.place

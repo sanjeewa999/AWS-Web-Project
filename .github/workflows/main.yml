@@ -1,23 +1,19 @@
-name: Deploy Website
+name: Deploy to Server
 
 on:
-  push:
+ push:
     branches:
-      - main # Change this to your main branch name
+      - main # Change this to your default branch if different
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+ deploy:
+    runs-on: self-hosted # Ensure this matches your self-hosted runner's label
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.AWSSSH }}
-
-      - name: Deploy website via SSH
-        run: |
-          scp -r ./* ubuntu@13.215.213.208:/www/wwwroot/awstesting.run.place
+    - name: Copy files to server
+      run: |
+        sudo cp -r . /www/wwwroot/awstesting.run.place
+      shell: bash
